@@ -1,0 +1,79 @@
+.bg-transparent { background-color: transparent; }
+
+.bg-primary { background-color: var(--lee-color-primary); }
+.bg-success { background-color: var(--lee-color-success); }
+.bg-warning { background-color: var(--lee-color-warning); }
+.bg-danger { background-color: var(--lee-color-danger); }
+.bg-secondary { background-color: var(--lee-color-bg-secondary); }
+
+.opacity0 { opacity: 0; }
+.opacity100 { opacity: 1; }
+
+.cursor-pointer { cursor: pointer; }
+.cursor-move { cursor: move; }
+.cursor-help { cursor: help; }
+.cursor-not-allowed { cursor: not-allowed; }
+.cursor-default { cursor: default; }
+.cursor-text { cursor: text; }
+.cursor-grab { cursor: grab; }
+.cursor-grabbing { cursor: grabbing; }
+
+.pointer-none { pointer-events: none; }
+.pointer-auto { pointer-events: auto; }
+
+.fl { float: left; }
+.fr { float: right; }
+.float-none { float: none; }
+
+.row::after,
+.clear::after,
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.box-border { box-sizing: border-box; }
+.box-content { box-sizing: content-box; }
+
+.resize-none { resize: none; }
+.resize { resize: both; }
+.resize-x { resize: horizontal; }
+.resize-y { resize: vertical; }
+
+.select-none { user-select: none; }
+.select-text { user-select: text; }
+.select-all { user-select: all; }
+.select-auto { user-select: auto; }
+
+.touch-auto { touch-action: auto; }
+.touch-none { touch-action: none; }
+.touch-pan-x { touch-action: pan-x; }
+.touch-pan-y { touch-action: pan-y; }
+
+.transition-none { transition: none; }
+
+.transition {
+  transition:
+    color .2s ease,
+    background-color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease,
+    opacity .2s ease,
+    transform .2s ease;
+}
+
+.transition-all { transition: all .2s ease; }
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

@@ -1,63 +1,442 @@
+# LeeLayout 2.0 beta.4
 
-# 语法说明
+[中文](#中文) \| [日本語](#日本語) \| [English](#english)
 
+---------------------------------------------
 
-### 关于单位
-以纯数字结尾的，默认单位是px，例：5表示5px；以p结尾的，是百分数单位，例：10p表示10%；数字前有“-”表示负数单位，例-5表示-5px，-10p表示-10%。
+# 中文
 
-## 一、布局
+LeeLayout 是一个轻量级的工具类 CSS（Utility
+CSS）库，提供基础样式工具，并根据项目源码中实际使用的类名按需生成数值型工具类。
 
-### 浮动、清浮动 fl、fr、clear
+LeeLayout 2.0
+直接集成到宿主项目现有的构建流程中，不会额外启动独立的文件监听进程。
 
-fl、fr分别代表左、右浮动，css语法 { float: left }、{ float: right }
+## 安装
 
-clear 为清浮动，用于浮动元素的父元素清除浮动影响(高度丢失)
+``` bash
+npm install lee-layout --save-dev
+```
 
-### 圆角 border-radius
-br全称为border-radius，后面的数字代表px值，例：br5 表示 border-radius: 5px
+## Vue 2 + Vue CLI / Webpack
 
-### 字号 font-size
-#####f代表font-size，后面数字代表px值，例：f12 表示 font-size: 12px
-##### f取值范围 (12 - 60)，+1递增(12 - 60)
+在 `vue.config.js` 中添加 LeeLayout 的 Webpack 插件：
 
-### 宽度、最小宽度、最大宽度 width、min-width、max-width
-##### w为width的缩写，例：w100 表示 width: 100px，w50p 表示 width: 50%
-##### min-w是min-width的缩写，例：min-w100 表示 min-width: 100px，min-w50p 表示 min-width: 50%
-##### max-w是max-width的缩写，例：max-w100 表示 max-width: 100px，max-w50p 表示 max-width: 50%
-##### w取值范围 (0 - 1200)，+1 递增(0 - 60)，+2 递增(62 - 120)，+10 递增(130-600)，+20 递增(620 - 1200)
+``` js
+const LeeLayoutWebpackPlugin = require("lee-layout/webpack");
 
-### 高度、最小高度、最大高度 height、min-height、max-height
-##### h为height的缩写，例：h100 表示 height: 100px，h50p 表示 height: 50%
-##### h取值范围 (0 - 1200)，+1 递增(0 - 50)，+2 递增(52 - 100)，+10 递增(100-600)
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      new LeeLayoutWebpackPlugin()
+    ]
+  }
+};
+```
 
-##### min-h是min-height的缩写，例：min-h100 表示 min-height: 100px，min-h50p 表示 min-height: 50%
-##### max-h是max-height的缩写，例：max-h100 表示 max-height: 100px，max-h50p 表示 max-height: 50%
+在应用入口文件中引入一次生成的 CSS：
 
-### 行高 line-height
-##### lh为line-height的缩写，例：lh30 表示 line-height: 30px
-##### lh取值范围 (18 - 120)，+2 递增(18 - 120)
+``` js
+import "./assets/LeeLayout.css";
+```
 
-### 外边距 margin-top、margin-bottom、margin-left、margin-right
-##### mg-t、mg-b、mg-l、mg-r 分别表示 margin-top、margin-bottom、margin-left、margin-right，例：mg-t10 表示 margin-top: 10px；组合用法 mg-tb10、mg-lr10 分别表示 { margin-top: 10px; margin-bottom: 10px; }、{ margin-left: 10px; margin-right: 10px; }
+之后按照原来的方式启动项目：
 
-### 内边距 padding-top、padding-bottom、padding-left、padding-right
-##### pd-t、pd-b、pd-l、pd-r 分别表示 padding-top、padding-bottom、padding-left、padding-right，例：pd-t10 表示 padding-top: 10px；组合用法 pd-tb10、pd-lr10 分别表示 { padding-top: 10px; padding-bottom: 10px; }、{ padding-left: 10px; padding-right: 10px; }
+``` bash
+npm run serve
+```
 
-### 定位 position
-#### 4种类型 static、relative、absolute、fixed
-##### pos-static 表示 position: static
-##### pos-relative 表示 position: relative
-##### pos-abs 表示 position: absolute
-##### pos-fix 表示 position: fixed
+LeeLayout 会在 Webpack
+构建或重新构建时自动运行，不需要额外执行监听命令。
 
-#### 位置控制 top、bottom、left、right
-##### t、b、l、r 分别表示 top、bottom、left、right
-##### 例：t10 表示 top: 10px，r20 表示 right: 20px，l50p 表示 left: 50%，t-20 表示 top: -20px，l-10p 表示 left: -10%
-##### t、b取值范围(0 - 300)，+1 递增(1 - 50)，+2 递增(52 - 100)，+10 递增 (110 - 300)
-##### l、r取值范围(0 - 600)，+1 递增(1 - 50)，+2 递增(52 - 100)，+10 递增 (110 - 600)
+## Vite
 
-#### 层级控制 z-index
-##### z 表示 z-index
-##### z-10 表示 z-index: 10
-##### z取值范围(0 - 10000) +1递增(1～10)，+10 递增(10 - 100)，+100递增 100-1000，+1000 递增 1000-10000
-##### 注：层级单位为纯数字，并且为正整数
+CommonJS（Node.js 常用模块规范）：
+
+``` js
+const leeLayout = require("lee-layout/vite");
+```
+
+ES Module（JavaScript 标准模块规范）：
+
+``` js
+import leeLayout from "lee-layout/vite";
+```
+
+将 `leeLayout()` 添加到现有的 Vite `plugins`
+数组中，并在应用入口文件中引入一次：
+
+``` js
+import "./assets/LeeLayout.css";
+```
+
+开发过程中，LeeLayout 复用 Vite
+自身的文件监听机制，不会额外启动独立的轮询进程。
+
+## lee.config.js
+
+配置文件可选。以下内容也是默认配置：
+
+``` js
+module.exports = {
+  content: ["./src"],
+  extensions: [".html", ".htm", ".vue", ".js", ".jsx", ".ts", ".tsx"],
+  unit: "px",
+  output: "./src/assets/LeeLayout.css"
+};
+```
+
+## 使用说明
+
+基础工具类可以直接组合使用：
+
+``` html
+<div class="flex items-center justify-between w-full">
+  ...
+</div>
+```
+
+数值型工具类会根据源码中实际出现的类名按需生成，默认单位为 `px`：
+
+``` html
+<div class="w347 h48 pd-l16 mg-t20 f14 br4">
+  ...
+</div>
+```
+
+支持百分比、负数以及无单位数值：
+
+``` html
+<div class="w50p mg-l-10 z100 order2">
+  ...
+</div>
+```
+
+其中 `z` 和 `order` 使用无单位数值。
+
+支持任意值，方括号中的 `_` 表示空格：
+
+``` html
+<div class="w-[20rem]"></div>
+<div class="w-[calc(100%-240px)]"></div>
+```
+
+支持按需生成 Grid（网格布局）相关类：
+
+``` html
+<div class="grid grid-cols-3 gap20">
+  <div class="col-span-2">...</div>
+</div>
+```
+
+常用数值前缀：
+
+-   `w` / `h`：宽度 / 高度
+-   `min-w` / `max-w` / `min-h` / `max-h`：最小、最大宽高
+-   `mg-*` / `pd-*`：外边距 / 内边距
+-   `t` / `r` / `b` / `l`：定位偏移
+-   `gap` / `gap-x` / `gap-y`：间距
+-   `f`：字号
+-   `lh`：行高
+-   `br`：圆角
+-   `z`：层叠顺序
+-   `order`：Flex/Grid 项目顺序
+-   `flex-basis-w`：Flex 基准尺寸
+
+## 说明
+
+LeeLayout 不会修改宿主项目的 `package.json`，也不会使用 `postinstall`
+安装后脚本。
+
+------------------------------------------------------------------------
+
+# 日本語
+
+LeeLayout は、基本的なスタイルユーティリティと、プロジェクト内で実際に使用されているクラス名から数値ユーティリティをオンデマンド生成する軽量なUtility CSS ライブラリです。
+
+LeeLayout 2.0は既存プロジェクトのビルドプロセスに統合され、別のファイル監視プロセスを起動しません。
+
+## インストール
+
+``` bash
+npm install lee-layout --save-dev
+```
+
+## Vue 2 + Vue CLI / Webpack
+
+`vue.config.js` に LeeLayout の Webpack プラグインを追加します。
+
+``` js
+const LeeLayoutWebpackPlugin = require("lee-layout/webpack");
+
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      new LeeLayoutWebpackPlugin()
+    ]
+  }
+};
+```
+
+アプリケーションのエントリーファイルで、生成された CSS を一度読み込みます。
+
+``` js
+import "./assets/LeeLayout.css";
+```
+
+その後は通常どおりプロジェクトを起動します。
+
+``` bash
+npm run serve
+```
+
+LeeLayoutはWebpackのビルドまたは再ビルド時に自動実行されるため、別の監視コマンドは必要ありません。
+
+## Vite
+
+CommonJS（Node.js で広く使われるモジュール形式）：
+
+``` js
+const leeLayout = require("lee-layout/vite");
+```
+
+ES Module（JavaScript 標準モジュール形式）：
+
+``` js
+import leeLayout from "lee-layout/vite";
+```
+
+既存の Vite `plugins` 配列に `leeLayout()`を追加し、アプリケーションのエントリーファイルで生成された CSS を一度読み込みます。
+
+``` js
+import "./assets/LeeLayout.css";
+```
+
+開発時は Vite の既存のファイル監視機能を利用するため、別のポーリングプロセスは起動しません。
+
+## lee.config.js
+
+設定ファイルは任意です。以下がデフォルト設定です。
+
+``` js
+module.exports = {
+  content: ["./src"],
+  extensions: [".html", ".htm", ".vue", ".js", ".jsx", ".ts", ".tsx"],
+  unit: "px",
+  output: "./src/assets/LeeLayout.css"
+};
+```
+
+## 使い方
+
+基本ユーティリティはそのまま組み合わせて使用できます。
+
+``` html
+<div class="flex items-center justify-between w-full">
+  ...
+</div>
+```
+
+数値ユーティリティは、ソースコード内で実際に使用されたクラス名からオンデマンド生成されます。デフォルト単位は
+`px` です。
+
+``` html
+<div class="w347 h48 pd-l16 mg-t20 f14 br4">
+  ...
+</div>
+```
+
+パーセント、負数、単位なしの数値にも対応しています。
+
+``` html
+<div class="w50p mg-l-10 z100 order2">
+  ...
+</div>
+```
+
+`z` と `order` は単位なしの数値です。
+
+任意値にも対応しています。角括弧内の `_` はスペースとして扱われます。
+
+``` html
+<div class="w-[20rem]"></div>
+<div class="w-[calc(100%-240px)]"></div>
+```
+
+Grid（グリッドレイアウト）関連クラスもオンデマンド生成できます。
+
+``` html
+<div class="grid grid-cols-3 gap20">
+  <div class="col-span-2">...</div>
+</div>
+```
+
+主な数値プレフィックス：
+
+-   `w` / `h`：幅 / 高さ
+-   `min-w` / `max-w` / `min-h` / `max-h`：最小・最大の幅と高さ
+-   `mg-*` / `pd-*`：マージン / パディング
+-   `t` / `r` / `b` / `l`：位置オフセット
+-   `gap` / `gap-x` / `gap-y`：間隔
+-   `f`：フォントサイズ
+-   `lh`：行の高さ
+-   `br`：角丸
+-   `z`：重なり順
+-   `order`：Flex/Grid アイテムの順序
+-   `flex-basis-w`：Flex の基準サイズ
+
+## 注意事項
+
+LeeLayout は導入先プロジェクトの `package.json`
+を変更せず、`postinstall` スクリプトも使用しません。
+
+------------------------------------------------------------------------
+
+# English
+
+LeeLayout is a lightweight utility CSS library that provides base
+utilities and generates numeric utility classes on demand from class
+names actually used in project source files.
+
+LeeLayout 2.0 integrates with the host project's existing build process
+and does not start a separate file-watching process.
+
+## Installation
+
+``` bash
+npm install lee-layout --save-dev
+```
+
+## Vue 2 + Vue CLI / Webpack
+
+Add the LeeLayout Webpack plugin to `vue.config.js`:
+
+``` js
+const LeeLayoutWebpackPlugin = require("lee-layout/webpack");
+
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      new LeeLayoutWebpackPlugin()
+    ]
+  }
+};
+```
+
+Import the generated CSS once from the application entry:
+
+``` js
+import "./assets/LeeLayout.css";
+```
+
+Then start the project normally:
+
+``` bash
+npm run serve
+```
+
+LeeLayout runs automatically when Webpack builds or rebuilds. No
+separate watch command is required.
+
+## Vite
+
+CommonJS configuration:
+
+``` js
+const leeLayout = require("lee-layout/vite");
+```
+
+ES Module configuration:
+
+``` js
+import leeLayout from "lee-layout/vite";
+```
+
+Add `leeLayout()` to the existing Vite `plugins` array and import the
+generated CSS once from the application entry:
+
+``` js
+import "./assets/LeeLayout.css";
+```
+
+During development, LeeLayout reuses Vite's existing file watcher and
+does not start a second polling process.
+
+## lee.config.js
+
+The configuration file is optional. The following values are the
+defaults:
+
+``` js
+module.exports = {
+  content: ["./src"],
+  extensions: [".html", ".htm", ".vue", ".js", ".jsx", ".ts", ".tsx"],
+  unit: "px",
+  output: "./src/assets/LeeLayout.css"
+};
+```
+
+## Usage
+
+Base utilities can be combined directly:
+
+``` html
+<div class="flex items-center justify-between w-full">
+  ...
+</div>
+```
+
+Numeric utilities are generated on demand from class names found in
+source files. The default unit is `px`:
+
+``` html
+<div class="w347 h48 pd-l16 mg-t20 f14 br4">
+  ...
+</div>
+```
+
+Percentage, negative, and unitless numeric values are supported:
+
+``` html
+<div class="w50p mg-l-10 z100 order2">
+  ...
+</div>
+```
+
+`z` and `order` use unitless numeric values.
+
+Arbitrary values are supported. An underscore (`_`) inside brackets
+represents a space:
+
+``` html
+<div class="w-[20rem]"></div>
+<div class="w-[calc(100%-240px)]"></div>
+```
+
+Grid utilities can also be generated on demand:
+
+``` html
+<div class="grid grid-cols-3 gap20">
+  <div class="col-span-2">...</div>
+</div>
+```
+
+Common numeric prefixes:
+
+-   `w` / `h`: width / height
+-   `min-w` / `max-w` / `min-h` / `max-h`: minimum and maximum
+    width/height
+-   `mg-*` / `pd-*`: margin / padding
+-   `t` / `r` / `b` / `l`: positional offsets
+-   `gap` / `gap-x` / `gap-y`: gaps
+-   `f`: font size
+-   `lh`: line height
+-   `br`: border radius
+-   `z`: stacking order
+-   `order`: Flex/Grid item order
+-   `flex-basis-w`: Flex basis size
+
+## Notes
+
+LeeLayout does not modify the host project's `package.json` and does not
+use a `postinstall` script.

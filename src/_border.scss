@@ -1,0 +1,26 @@
+.border-none { border: 0; }
+.border { border: 1px solid var(--lee-color-border); }
+.border-t { border-top: 1px solid var(--lee-color-border); }
+.border-r { border-right: 1px solid var(--lee-color-border); }
+.border-b { border-bottom: 1px solid var(--lee-color-border); }
+.border-l { border-left: 1px solid var(--lee-color-border); }
+
+.border-solid { border-style: solid; }
+.border-dashed { border-style: dashed; }
+.border-dotted { border-style: dotted; }
+.border-double { border-style: double; }
+
+.border-primary { border-color: var(--lee-color-primary); }
+.border-success { border-color: var(--lee-color-success); }
+.border-warning { border-color: var(--lee-color-warning); }
+.border-danger { border-color: var(--lee-color-danger); }
+
+.br-sm { border-radius: var(--lee-radius-sm); }
+.br-md { border-radius: var(--lee-radius-md); }
+.br-lg { border-radius: var(--lee-radius-lg); }
+.br-full { border-radius: var(--lee-radius-full); }
+
+.shadow-none { box-shadow: none; }
+.shadow-sm { box-shadow: var(--lee-shadow-sm); }
+.shadow-md { box-shadow: var(--lee-shadow-md); }
+.shadow-lg { box-shadow: var(--lee-shadow-lg); }

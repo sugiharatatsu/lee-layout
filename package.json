@@ -1,0 +1,29 @@
+{
+  "name": "lee-layout",
+  "version": "2.0.0-beta.4",
+  "description": "Lightweight utility-first CSS toolkit with build-tool integration and on-demand utility generation.",
+  "main": "index.js",
+  "files": [
+    "generator",
+    "plugins",
+    "src",
+    "index.js",
+    "webpack.js",
+    "vite.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=10.24.1"
+  },
+  "dependencies": {
+    "sass": "1.32.13"
+  },
+  "keywords": [
+    "css",
+    "scss",
+    "utility-css",
+    "vue",
+    "react"
+  ],
+  "license": "MIT"
+}

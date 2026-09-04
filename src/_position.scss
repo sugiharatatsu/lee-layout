@@ -1,0 +1,65 @@
+.pos-static { position: static; }
+.pos-relative { position: relative; }
+.pos-abs { position: absolute; }
+
+.pos-fix,
+.pos-fixed { position: fixed; }
+
+.pos-sticky { position: sticky; }
+
+.inset0 { inset: 0; }
+
+.pos-c {
+  inset: 0;
+  margin: auto;
+}
+
+.pos-c-t {
+  top: 0;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.pos-c-r {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.pos-c-b {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.pos-c-l {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.pos-center {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+.pos-center-x {
+  left: 50%;
+  translate: -50% 0;
+}
+
+.pos-center-y {
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.z-auto { z-index: auto; }
