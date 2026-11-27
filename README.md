@@ -1,8 +1,151 @@
 # LeeLayout 2.0 beta.1
 
-[中文](#中文) \| [日本語](#日本語) \| [English](#english)
+[日本語](＃日本語) |\[中文](＃中文) \| [English](#english)
 
+Ver.1.0（CSS直接読み込み版）は v1.0.0 を参照してください。
 ---------------------------------------------
+
+# 日本語
+
+LeeLayout は、基本的なスタイルユーティリティと、プロジェクト内で実際に使用されているクラス名から数値ユーティリティをオンデマンド生成する軽量なUtility CSS ライブラリです。
+
+LeeLayout 2.0は既存プロジェクトのビルドプロセスに統合され、別のファイル監視プロセスを起動しません。
+
+## インストール
+
+``` bash
+npm install lee-layout --save-dev
+```
+
+## Vue 2 + Vue CLI / Webpack
+
+`vue.config.js` に LeeLayout の Webpack プラグインを追加します。
+
+``` js
+const LeeLayoutWebpackPlugin = require("lee-layout/webpack");
+
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      new LeeLayoutWebpackPlugin()
+    ]
+  }
+};
+```
+
+アプリケーションのエントリーファイルで、生成された CSS を一度読み込みます。
+
+``` js
+import "./assets/LeeLayout.css";
+```
+
+その後は通常どおりプロジェクトを起動します。
+
+``` bash
+npm run serve
+```
+
+LeeLayoutはWebpackのビルドまたは再ビルド時に自動実行されるため、別の監視コマンドは必要ありません。
+
+## Vite
+
+CommonJS（Node.js で広く使われるモジュール形式）：
+
+``` js
+const leeLayout = require("lee-layout/vite");
+```
+
+ES Module（JavaScript 標準モジュール形式）：
+
+``` js
+import leeLayout from "lee-layout/vite";
+```
+
+既存の Vite `plugins` 配列に `leeLayout()`を追加し、アプリケーションのエントリーファイルで生成された CSS を一度読み込みます。
+
+``` js
+import "./assets/LeeLayout.css";
+```
+
+開発時は Vite の既存のファイル監視機能を利用するため、別のポーリングプロセスは起動しません。
+
+## lee.config.js
+
+設定ファイルは任意です。以下がデフォルト設定です。
+
+``` js
+module.exports = {
+  content: ["./src"],
+  extensions: [".html", ".htm", ".vue", ".js", ".jsx", ".ts", ".tsx"],
+  unit: "px",
+  output: "./src/assets/LeeLayout.css"
+};
+```
+
+## 使い方
+
+基本ユーティリティはそのまま組み合わせて使用できます。
+
+``` html
+<div class="flex items-center justify-between w-full">
+  ...
+</div>
+```
+
+数値ユーティリティは、ソースコード内で実際に使用されたクラス名からオンデマンド生成されます。デフォルト単位は
+`px` です。
+
+``` html
+<div class="w347 h48 pd-l16 mg-t20 f14 br4">
+  ...
+</div>
+```
+
+パーセント、負数、単位なしの数値にも対応しています。
+
+``` html
+<div class="w50p mg-l-10 z100 order2">
+  ...
+</div>
+```
+
+`z` と `order` は単位なしの数値です。
+
+任意値にも対応しています。角括弧内の `_` はスペースとして扱われます。
+
+``` html
+<div class="w-[20rem]"></div>
+<div class="w-[calc(100%-240px)]"></div>
+```
+
+Grid（グリッドレイアウト）関連クラスもオンデマンド生成できます。
+
+``` html
+<div class="grid grid-cols-3 gap20">
+  <div class="col-span-2">...</div>
+</div>
+```
+
+主な数値プレフィックス：
+
+-   `w` / `h`：幅 / 高さ
+-   `min-w` / `max-w` / `min-h` / `max-h`：最小・最大の幅と高さ
+-   `mg-*` / `pd-*`：マージン / パディング
+-   `t` / `r` / `b` / `l`：位置オフセット
+-   `gap` / `gap-x` / `gap-y`：間隔
+-   `f`：フォントサイズ
+-   `lh`：行の高さ
+-   `br`：角丸
+-   `z`：重なり順
+-   `order`：Flex/Grid アイテムの順序
+-   `flex-basis-w`：Flex の基準サイズ
+
+## 注意事項
+
+LeeLayout は導入先プロジェクトの `package.json`
+を変更せず、`postinstall` スクリプトも使用しません。
+
+------------------------------------------------------------------------
 
 # 中文
 
@@ -147,148 +290,6 @@ module.exports = {
 
 LeeLayout 不会修改宿主项目的 `package.json`，也不会使用 `postinstall`
 安装后脚本。
-
-------------------------------------------------------------------------
-
-# 日本語
-
-LeeLayout は、基本的なスタイルユーティリティと、プロジェクト内で実際に使用されているクラス名から数値ユーティリティをオンデマンド生成する軽量なUtility CSS ライブラリです。
-
-LeeLayout 2.0は既存プロジェクトのビルドプロセスに統合され、別のファイル監視プロセスを起動しません。
-
-## インストール
-
-``` bash
-npm install lee-layout --save-dev
-```
-
-## Vue 2 + Vue CLI / Webpack
-
-`vue.config.js` に LeeLayout の Webpack プラグインを追加します。
-
-``` js
-const LeeLayoutWebpackPlugin = require("lee-layout/webpack");
-
-module.exports = {
-  configureWebpack: {
-    plugins: [
-      new LeeLayoutWebpackPlugin()
-    ]
-  }
-};
-```
-
-アプリケーションのエントリーファイルで、生成された CSS を一度読み込みます。
-
-``` js
-import "./assets/LeeLayout.css";
-```
-
-その後は通常どおりプロジェクトを起動します。
-
-``` bash
-npm run serve
-```
-
-LeeLayoutはWebpackのビルドまたは再ビルド時に自動実行されるため、別の監視コマンドは必要ありません。
-
-## Vite
-
-CommonJS（Node.js で広く使われるモジュール形式）：
-
-``` js
-const leeLayout = require("lee-layout/vite");
-```
-
-ES Module（JavaScript 標準モジュール形式）：
-
-``` js
-import leeLayout from "lee-layout/vite";
-```
-
-既存の Vite `plugins` 配列に `leeLayout()`を追加し、アプリケーションのエントリーファイルで生成された CSS を一度読み込みます。
-
-``` js
-import "./assets/LeeLayout.css";
-```
-
-開発時は Vite の既存のファイル監視機能を利用するため、別のポーリングプロセスは起動しません。
-
-## lee.config.js
-
-設定ファイルは任意です。以下がデフォルト設定です。
-
-``` js
-module.exports = {
-  content: ["./src"],
-  extensions: [".html", ".htm", ".vue", ".js", ".jsx", ".ts", ".tsx"],
-  unit: "px",
-  output: "./src/assets/LeeLayout.css"
-};
-```
-
-## 使い方
-
-基本ユーティリティはそのまま組み合わせて使用できます。
-
-``` html
-<div class="flex items-center justify-between w-full">
-  ...
-</div>
-```
-
-数値ユーティリティは、ソースコード内で実際に使用されたクラス名からオンデマンド生成されます。デフォルト単位は
-`px` です。
-
-``` html
-<div class="w347 h48 pd-l16 mg-t20 f14 br4">
-  ...
-</div>
-```
-
-パーセント、負数、単位なしの数値にも対応しています。
-
-``` html
-<div class="w50p mg-l-10 z100 order2">
-  ...
-</div>
-```
-
-`z` と `order` は単位なしの数値です。
-
-任意値にも対応しています。角括弧内の `_` はスペースとして扱われます。
-
-``` html
-<div class="w-[20rem]"></div>
-<div class="w-[calc(100%-240px)]"></div>
-```
-
-Grid（グリッドレイアウト）関連クラスもオンデマンド生成できます。
-
-``` html
-<div class="grid grid-cols-3 gap20">
-  <div class="col-span-2">...</div>
-</div>
-```
-
-主な数値プレフィックス：
-
--   `w` / `h`：幅 / 高さ
--   `min-w` / `max-w` / `min-h` / `max-h`：最小・最大の幅と高さ
--   `mg-*` / `pd-*`：マージン / パディング
--   `t` / `r` / `b` / `l`：位置オフセット
--   `gap` / `gap-x` / `gap-y`：間隔
--   `f`：フォントサイズ
--   `lh`：行の高さ
--   `br`：角丸
--   `z`：重なり順
--   `order`：Flex/Grid アイテムの順序
--   `flex-basis-w`：Flex の基準サイズ
-
-## 注意事項
-
-LeeLayout は導入先プロジェクトの `package.json`
-を変更せず、`postinstall` スクリプトも使用しません。
 
 ------------------------------------------------------------------------
 
