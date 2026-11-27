@@ -1,6 +1,6 @@
 {
   "name": "lee-layout",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0",
   "description": "Lightweight utility-first CSS toolkit with build-tool integration and on-demand utility generation.",
   "main": "index.js",
   "files": [
