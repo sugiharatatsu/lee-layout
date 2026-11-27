@@ -1,8 +1,9 @@
 # LeeLayout 2.0 beta.1
 
-[日本語](＃日本語) |\[中文](＃中文) \| [English](#english)
+[日本語](#日本語) | [中文](#中文) | [English](#english)
 
-Ver.1.0（CSS直接読み込み版）は v1.0.0 を参照してください。
+> Ver.1.0（CSS直接読み込み版）は [v1.0.0](https://github.com/sugiharatatsu/lee-layout/releases/tag/v1.0.0) を参照してください。
+
 ---------------------------------------------
 
 # 日本語
