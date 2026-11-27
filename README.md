@@ -15,7 +15,7 @@ LeeLayout 2.0は既存プロジェクトのビルドプロセスに統合され�
 ## インストール
 
 ``` bash
-npm install lee-layout --save-dev
+npm install --save-dev github:sugiharatatsu/lee-layout#v2.0.0-beta.1
 ```
 
 ## Vue 2 + Vue CLI / Webpack
@@ -159,7 +159,7 @@ LeeLayout 2.0
 ## 安装
 
 ``` bash
-npm install lee-layout --save-dev
+npm install --save-dev github:sugiharatatsu/lee-layout#v2.0.0-beta.1
 ```
 
 ## Vue 2 + Vue CLI / Webpack
@@ -306,7 +306,7 @@ and does not start a separate file-watching process.
 ## Installation
 
 ``` bash
-npm install lee-layout --save-dev
+npm install --save-dev github:sugiharatatsu/lee-layout#v2.0.0-beta.1
 ```
 
 ## Vue 2 + Vue CLI / Webpack
